@@ -1,9 +1,10 @@
 const axios = require('axios');
 const moment = require('moment');
 
-const passPhrase = "4rz00xbb5fw";//g3qw3q22g9l";
-const apiKey = "b9f78af7b3e3d814c68942d6e413ea9b";//4332c122bfa49f178b9a795ca546c3e3";
-const base64secret = "riPy7vwD22b6MUOOetmaQ9CT5XoziPoi1G+JcorbpF8RTENmfrEjqk0fxVZ8m3nqPX3F3YMuArpjHEGojZ8cWQ==";//gD2aCs4dLa0S5a0WKXIFL+0RQlMXBLLVwID5sm/FhsdrZBVYIZmAEuDNGRzU+M0tyt6k/bDK1JT4codp5oMVUg==";//
+const Keys = require('keys.js');
+const passPhrase = Keys.passPhrase;
+const apiKey = Keys.apiKey;
+const base64secret = Keys.base64secret;
 
 const GdaxAPI = 'https://api.gdax.com';//"https://public.sandbox.gdax.com"; https://api-public.sandbox.gdax.com/
 
