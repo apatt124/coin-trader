@@ -60,19 +60,22 @@ axios.all([
 
 
 router.get('/', (req, res) => {
-	
-	LTCUSD
-	.getProductTicker((error, response, data) => {
-	  if (error) {
-	    console.log(error);
-	  } else {
-	  	console.log(parseFloat(data.price).toFixed(2));
-	    res.render('default', {
+	axios.all([
+		axios.get(BTCUSD),
+		axios.get(ETHUSD),
+		axios.get(LTCUSD),
+	])
+	  .then(axios.spread((BTC, ETH, LTC) => {
+	  	res.render('default', {
 		    title: 'Alex\'s Algorithm',
-		    LTCticker: parseFloat(data.price).toFixed(2)
+		    BTCticker: parseFloat(BTC.data.price).toFixed(2),
+		    ETHticker: parseFloat(ETH.data.price).toFixed(2),
+		    LTCticker: parseFloat(LTC.data.price).toFixed(2)
 		});
-	  }
-	})
+	  }))
+	  .catch((err) => {
+	  	console.log(error);
+	  });
 });
 
 
