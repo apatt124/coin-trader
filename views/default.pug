@@ -1,0 +1,12 @@
+extends template
+
+block content
+    section(style='text-align:center;')
+        section
+            img(src='/public/img/cryptocurrencies.png', width='500')
+        section  
+            h2(style={textAlign: 'center'}) #{test}
+        section
+            div(style={width: '50%', float: 'left'})
+                p <b>LTC:</b> $#{LTCticker}
+            div(style={width: '50%', float: 'left'})

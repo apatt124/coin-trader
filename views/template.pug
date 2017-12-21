@@ -1,0 +1,17 @@
+doctype html
+
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title #{title}
+        link(rel='stylesheet', href='/public/css/alertify.css')
+        link(rel='stylesheet', href='/public/css/style.css')
+        script(src='/public/lib/jquery-3.0.0.min.js')
+        script(src='/public/lib/alertify.min.js')
+
+    body
+        include inc/header.pug
+        section#content-body
+            block content
+    include inc/footer.pug
+        
