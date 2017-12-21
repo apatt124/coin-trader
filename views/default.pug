@@ -1,14 +1,21 @@
 extends template
 
 block content
-    section(style='text-align:center;')
-        section
-            img(src='/public/img/cryptocurrencies.png', width='500')
-        section  
-            h2(style={textAlign: 'center'}) #{test}
-        section
-            div(style={width: '50%', float: 'left'})
-            	p <b>BTC:</b> $#{BTCticker}
-            	p <b>ETH:</b> $#{ETHticker}
-                p <b>LTC:</b> $#{LTCticker}
-            div(style={width: '50%', float: 'left'})
+	section(style='text-align:center;')
+		section
+			img(src='/public/img/cryptocurrencies.png', width='500')
+		section
+			h2(style={textAlign: 'center'}) #{test}
+		section
+			div(style={width: '50%', float: 'left', 'text-align': 'left'})
+				p <b>BTC:</b> $<span id="btc-ticker">#{BTCticker}</span>
+				p <b>ETH:</b> $<span id="eth-ticker">#{ETHticker}</span>
+				p <b>LTC:</b> $<span id="ltc-ticker">#{LTCticker}</span>
+			div(style={width: '50%', float: 'left'})
+	script(
+			src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+	  		crossorigin="anonymous"
+		)
+	script(src="/public/lib/socket.io.js")
+	script(src="/public/lib/default-scripts.js")

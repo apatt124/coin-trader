@@ -1,15 +1,21 @@
-const router  = require('express').Router();
-const Gdax = require('gdax');
-const axios = require('axios');
-const moment = require('moment');
+const express      = require('express');
+const router  	= require('express').Router();
+const app      	= express();
+const server	= require('http').createServer(app);
+const io 		= require('socket.io')(server);
+const Gdax 		= require('gdax');
+const axios 	= require('axios');
+const moment 	= require('moment');
 
-const GdaxAPI = 'https://api.gdax.com';
-const LTCUSD = new Gdax.PublicClient('LTC-USD');
-const BTCUSD = new Gdax.PublicClient('BTC-USD');
-const ETHUSD = new Gdax.PublicClient('ETH-USD');
+const GdaxAPI 	= 'https://api.gdax.com';
+const LTCUSD 	= new Gdax.PublicClient('LTC-USD');
+const BTCUSD 	= new Gdax.PublicClient('BTC-USD');
+const ETHUSD 	= new Gdax.PublicClient('ETH-USD');
 
-let LTCticker = "XXXXX.XXX";
-let timeFactor = 1;
+let BTCticker 	= "XXXXX.XX";
+let ETHticker 	= "XXXXX.XX";
+let LTCticker 	= "XXXXX.XX";
+let timeFactor 	= 1;
 let granularity = 10;	
 
 let getLitecoin = () => {
@@ -45,25 +51,23 @@ axios.all([
 		getEthereum(),
 	])
   .then(axios.spread((LTC, BTC, ETH) => {
-  	console.log("LTC:");
-  	console.dir(LTC.data);
-  	console.log("BTC:");
-  	console.dir(BTC.data);
-  	console.log("ETH:");
-  	console.dir(ETH.data);
+  	// console.log("LTC:");
+  	// console.dir(LTC.data);
+  	// console.log("BTC:");
+  	// console.dir(BTC.data);
+  	// console.log("ETH:");
+  	// console.dir(ETH.data);
   }))
   .catch((err) => {
   	console.log(error);
   });
 
-
-
-
 router.get('/', (req, res) => {
+
 	axios.all([
-		axios.get(BTCUSD),
-		axios.get(ETHUSD),
-		axios.get(LTCUSD),
+		axios.get(GdaxAPI + "/products/BTC-USD/ticker"),	// Get Bitcoin Product Ticker
+		axios.get(GdaxAPI + "/products/ETH-USD/ticker"),	// Get Ethereum Product Ticker
+		axios.get(GdaxAPI + "/products/LTC-USD/ticker"),	// Get Litecoin Product Ticker
 	])
 	  .then(axios.spread((BTC, ETH, LTC) => {
 	  	res.render('default', {
